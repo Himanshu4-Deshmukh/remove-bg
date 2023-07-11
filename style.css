@@ -1,0 +1,43 @@
+
+
+.input-group {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+label[for="input-image"] {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+input[type="file"] {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid #307df0;
+    font-size: 18px;
+    background-color: #f5f5f5;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="file"]:focus {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.output-group {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+#output-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #307df0;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+    

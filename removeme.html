@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Bg-Remove</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="https://pngimg.com/d/letter_r_PNG93939.png" type="image/x-icon">
+    <link rel="stylesheet" media="screen"
+        href="https://static.remove.bg/remove-bg-web/2ba30df45caf94f2cb25407b2ad5358dbf52316b/packs/css/application-cb7fbd75.css">
+        
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div
+        class="flex flex-col md:flex-row md:justify-start items-center justify-center py-2 shadow-md sticky top-0 bg-white z-10">
+        <div class="logo ml-8 flex items-center space-x-3 font-bold md:text-xl md:space-x-6">
+            <img src="/img/replica.png" width="20%">
+        </div>
+    </div>
+
+
+
+
+
+    <div class="empty-state" data-v-06851998="">
+        <h1 class="d-flex justify-content-center" data-v-06851998="" style=" margin-top: 20px;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        color: #333;"><span class="col-sm-9 d-block" data-v-06851998="">Upload an image to remove the background</span>
+        </h1>
+        <div class="mx-auto mt-5" data-v-06851998="" style="max-width: 400px;">
+            <div class="card card-with-shadow card-rounded-max card-without-border upload-widget-card"
+                data-v-0f3bcab4="" data-v-06851998="">
+                <div class="card-body text-center" data-v-0f3bcab4="">
+                    <div class="mt-5 mb-4 d-none d-md-block  " data-v-0f3bcab4="">
+                        <button class="btn btn-lg d-inline font-bold">
+                            <img src="/img/upload.png" width="80" alt="" srcset="">
+                        </button>
+                    </div>
+                    <div class="input-group align-items-center">
+                        <label for="input-image"></label>
+                        <input type="file" id="input-image" accept="image/*">
+                        <br><br><br>
+                        <div class="output-group">
+                            <img id="output-image">
+                        </div>
+                        <br> <br> <br> <br>
+                    </div>
+                    <div class="content-center mt-6">
+                        <a class="btn btn-outline-primary btn-sm px-6 m-3  " id="download-button" href="#"> Download</a>
+                        <button class="btn btn-outline-primary btn-sm px-6 m-3" onClick="window.location.reload(true)">
+                            Convert Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <div class="prism d-none-mobile-app" >
+        <footer class="bg-white w-full" >
+            <div class="bg-repeat-x bg-seperator-start bg-top !pt-6 bg-typo-secondary">
+                <div class="mx-auto w-full px-8 max-w-7xl py-16">
+                    <div class="pt-16 lg:flex space-y-4 lg:space-y-0 lg:flex-row lg:justify-between lg:items-center">
+                        <div class="text-white flex items-center gap-x-1 text-sm">
+                            Made with <svg width="24" height="24" style="color:red ;" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0414 20.0011C10.1406 20.017 4.2306 15.3349 3.38489 11.7532C2.67499 8.74661 4.5951 5.00098 8.3871 5.00098C10.2353 5.00098 11.4768 6.36969 12.0414 6.85677C12.6015 6.41123 13.7813 5.02188 15.7314 5.01329C19.4914 4.99673 21.3158 8.76243 20.589 11.7532C19.8313 14.8711 13.9423 19.9852 12.0414 20.0011Z"
+                                    fill="currentColor"></path>
+                            </svg> <span class="sr-only">love</span> by REPLICA
+                        </div>
+                        <div class="text-white text-sm">© Replica 2023</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+
+
+
+    <script>
+
+
+        const inputImage = document.querySelector("#input-image");
+        const outputImage = document.querySelector("#output-image");
+        const downloadButton = document.querySelector("#download-button");
+
+        inputImage.addEventListener("change", async function () {
+            const reader = new FileReader();
+            reader.onload = async function () {
+                const imageFile = inputImage.files[0];
+                const formData = new FormData();
+                formData.append("image_file", imageFile);
+                formData.append("size", "auto");
+
+                const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-Api-Key": "sF7cuypcNBjrmoSygrjxhsoa"
+                    }
+                });
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                outputImage.src = url;
+                downloadButton.href = url;
+            };
+            reader.readAsDataURL(inputImage.files[0]);
+        });
+
+        downloadButton.addEventListener("click", function () {
+            downloadButton.download = "Bg-remove.png";
+        });
+
+
+    </script>
+</body>
+
+</html>
